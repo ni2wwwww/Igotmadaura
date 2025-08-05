@@ -2556,7 +2556,22 @@ def generate_fake_address():
 
     # إرسال الطلب للحصول على البيانات المزيفة
     response = r.post('https://www.prepostseo.com/ajax/fake-address-generator', cookies=r.cookies, data=data, headers=headers).json()
-    extracted_data = response[0]
+    
+    # Handle different response structures from the API
+    # The response could be: a list, a dict with 'data' key, or a dict directly
+    if isinstance(response, list):
+        # Response is a list, use the first element
+        extracted_data = response[0]
+    elif isinstance(response, dict):
+        if 'data' in response and isinstance(response['data'], list):
+            # Response is a dict with 'data' key containing a list
+            extracted_data = response['data'][0]
+        else:
+            # Response is a dict directly containing the data
+            extracted_data = response
+    else:
+        # Fallback: assume it's the data directly
+        extracted_data = response
     return {
         'name': extracted_data['name'],
         'email': extracted_data['email'],
@@ -2593,75 +2608,77 @@ def generate_fake_address():
         'bank': extracted_data['bank'],
         'bcode': extracted_data['bcode']
     }
-data = generate_fake_address()
-name = data['name']
-email = data['email']
-phone = data['phone']
-postcode = data['postcode']
-street_address = data['street_address']
-city = data['city']
-country = data['country']
-state = data['state']
-company = data['company']
-gender = data['gender']
-credit_name = data['credit_name']
-first_name = data['first_name']
-last_name = data['last_name']
-credit_expiration_date = data['credit_expiration_date']
-account_no = data['account_no']
-username = data['username']
-password = data['password']
-ipv4 = data['ipv4']
-ipv6 = data['ipv6']
-mac_address = data['mac_address']
-semail = data['semail']
-user_agent_str = data['user_agent']
-job_title = data['job_title']
-com_email = data['com_email']
-salary = data['salary']
-iban = data['iban']
-dob = data['dob']
-age = data['age']
-height = data['height']
-weight = data['weight']
-hair = data['hair']
-eye = data['eye']
-bank = data['bank']
-bcode = data['bcode']
-print(name)
-print(email)
-print(phone)
-print(postcode)
-print(street_address)
-print(city)
-print(country)
-print(state)
-print(company)
-print(gender)
-print(credit_name)
-print(first_name)
-print(last_name)
-print(credit_expiration_date)
-print(account_no)
-print(username)
-print(password)
-print(ipv4)
-print(ipv6)
-print(mac_address)
-print(semail)
-print(user_agent_str)
-print(job_title)
-print(com_email)
-print(salary)
-print(iban)
-print(dob)
-print(age)
-print(height)
-print(weight)
-print(hair)
-print(eye)
-print(bank)
-print(bcode)
+# Only execute when running the script directly, not when importing
+if __name__ == "__main__":
+    data = generate_fake_address()
+    name = data['name']
+    email = data['email']
+    phone = data['phone']
+    postcode = data['postcode']
+    street_address = data['street_address']
+    city = data['city']
+    country = data['country']
+    state = data['state']
+    company = data['company']
+    gender = data['gender']
+    credit_name = data['credit_name']
+    first_name = data['first_name']
+    last_name = data['last_name']
+    credit_expiration_date = data['credit_expiration_date']
+    account_no = data['account_no']
+    username = data['username']
+    password = data['password']
+    ipv4 = data['ipv4']
+    ipv6 = data['ipv6']
+    mac_address = data['mac_address']
+    semail = data['semail']
+    user_agent_str = data['user_agent']
+    job_title = data['job_title']
+    com_email = data['com_email']
+    salary = data['salary']
+    iban = data['iban']
+    dob = data['dob']
+    age = data['age']
+    height = data['height']
+    weight = data['weight']
+    hair = data['hair']
+    eye = data['eye']
+    bank = data['bank']
+    bcode = data['bcode']
+    print(name)
+    print(email)
+    print(phone)
+    print(postcode)
+    print(street_address)
+    print(city)
+    print(country)
+    print(state)
+    print(company)
+    print(gender)
+    print(credit_name)
+    print(first_name)
+    print(last_name)
+    print(credit_expiration_date)
+    print(account_no)
+    print(username)
+    print(password)
+    print(ipv4)
+    print(ipv6)
+    print(mac_address)
+    print(semail)
+    print(user_agent_str)
+    print(job_title)
+    print(com_email)
+    print(salary)
+    print(iban)
+    print(dob)
+    print(age)
+    print(height)
+    print(weight)
+    print(hair)
+    print(eye)
+    print(bank)
+    print(bcode)
 
 def cvv(ccx):
 	import requests,user_agent,re,base64,json,random
@@ -5204,4 +5221,7 @@ def x(ccx):
 		for varp in varps:
 			up(varp)
 		return "RISK: Retry this BIN later."
-print(br('4094081007034951|10|24|633'))
+
+# Only execute when running the script directly, not when importing
+if __name__ == "__main__":
+    print(br('4094081007034951|10|24|633'))
